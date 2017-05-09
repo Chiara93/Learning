@@ -4,7 +4,7 @@ public class Seminar {
 	private Course _course;
 	private String _location;
 	private int _seatsLeft;
-	private ArrayList<Enrollment> _enrollments = new ArrayList<>();
+	private ArrayList<Student> _students = new ArrayList<>();
 	
 	public Seminar(final Course course, final String location, final int seatsLeft) {
 		_course = course;
@@ -23,17 +23,21 @@ public class Seminar {
 	public String getStudentList() {
 		String studentList = "";
 		
-		for (Enrollment enrollment : _enrollments) {
-			studentList = studentList + enrollment.getInfo() + "\n";
+		for (Student student : _students) {
+			studentList = studentList + student.getInfo() + "\n";
 		}
 		return studentList;
 	}
 	
 	public String getName() {
-		return _course.getName();
+		return _course.getName() + "(" + _course.getNumber() + ")";
 	}
 	
 	public String getDescription() {
 		return _course.getDescription();
+	}
+	
+	public void enroll(Student student) {
+		_students.add(student);
 	}
 }
