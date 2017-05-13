@@ -1,3 +1,4 @@
+package model;
 
 public class Student {
 	private String _name;
@@ -8,12 +9,12 @@ public class Student {
 		_lastName = lastName;
 	}
 	
-	public String getInfo() {
-		return getFullName();
+	public String getName() {
+		return _name;
 	}
-
-	private String getFullName() {
-		return _name + " " + _lastName;		
+	
+	public String getLastName() {
+		return _lastName;
 	}
 		
 }

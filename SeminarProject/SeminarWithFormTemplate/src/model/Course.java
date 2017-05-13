@@ -1,3 +1,4 @@
+package model;
 
 public class Course {
 	private String _courseName;
