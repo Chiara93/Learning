@@ -1,4 +1,4 @@
-package replaceTypeCodeWithState;
+package replaceConditionalWithPolymorphism;
 
 public class Employee {
 
@@ -20,15 +20,18 @@ public class Employee {
 	}
 
 	public double payAmount() {
-		switch (_employeeType.getType()) {
-		case EmployeeType.ENGINEER:
-			return _monthlySalary;
-		case EmployeeType.SALESMAN:
-			return _monthlySalary + _commission;
-		case EmployeeType.MANAGER:
-			return _monthlySalary + _bonus;
-		default:
-			throw new RuntimeException("Incorrect Employee");
-		}
+		return _employeeType.payAmount(this);
+	}
+	
+	public double getMonthlySalary() {
+		return _monthlySalary;
+	}
+	
+	public double getCommission() {
+		return _commission;
+	}
+	
+	public double getBonus() {
+		return _bonus;
 	}
 }

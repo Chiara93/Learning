@@ -1,4 +1,4 @@
-package replaceTypeCodeWithState;
+package replaceConditionalWithPolymorphism;
 
 public abstract class EmployeeType {
 	public static final int ENGINEER = 0;
@@ -18,5 +18,7 @@ public abstract class EmployeeType {
 		}
 	}
 
+	public abstract double payAmount(Employee employee);
+	
 	public abstract int getType();
 }
