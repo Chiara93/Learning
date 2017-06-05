@@ -27,7 +27,7 @@ public class SimpleQueue implements IQueue{
 		}
 		front = (front + 1)% MAXSIZE;
 		counter--;
-		return false;
+		return true;
 	}
 
 	@Override

@@ -40,5 +40,9 @@ public class MonitorableQueue implements IQueue {
 	public boolean isEmpty() {
 		return simpleQueue.isEmpty();
 	}
+	
+	public int getTreshold() {
+		return highTreshold;
+	}
 
 }
