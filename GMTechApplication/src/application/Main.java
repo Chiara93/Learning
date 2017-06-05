@@ -27,15 +27,22 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		/* Populate list of all presenter */
 		presenters.addPresenter(new Presenter("Chiara", "Ferrario", new Date()));
-		presenters.addPresenter(new Presenter("Mario", "Michelini", new Date()));
-		presenters.addPresenter(new Presenter("Caterina", "Fermi", new Date()));
-		presenters.addPresenter(new Presenter("Flavio", "Bianchi", new Date()));
-		presenters.addPresenter(new Presenter("Filippo", "Neri", new Date()));
-		presenters.addPresenter(new Presenter("Marco", "Rossi", new Date()));
-		presenters.addPresenter(new Presenter("Francesca", "Della Valle", new Date()));
-		presenters.addPresenter(new Presenter("Davide", "Bernasconi", new Date()));
-		presenters.addPresenter(new Presenter("Dalia", "Liguori", new Date()));
-		presenters.addPresenter(new Presenter("Stefania", "Fiori", new Date()));
+		presenters.addPresenter(new Presenter("Stefano", "Coluccia", new Date()));
+		presenters.addPresenter(new Presenter("Valentino", "Decarli", new Date()));
+		presenters.addPresenter(new Presenter("Gennaro", "", new Date()));
+		presenters.addPresenter(new Presenter("Dario", "Zivko", new Date()));
+		presenters.addPresenter(new Presenter("Alessandro", "Misenta", new Date()));
+		presenters.addPresenter(new Presenter("Mattia", "Cattaneo", new Date()));
+		presenters.addPresenter(new Presenter("Enrico", "Mazzi Bernasconi", new Date()));
+		presenters.addPresenter(new Presenter("Manlio", "Modugno", new Date()));
+		presenters.addPresenter(new Presenter("Enrico", "Mangano", new Date()));
+		presenters.addPresenter(new Presenter("Tommaso", "Torti", new Date()));
+		presenters.addPresenter(new Presenter("Giovanni", "Mele", new Date()));
+		presenters.addPresenter(new Presenter("Matteo", "Besutti", new Date()));
+		presenters.addPresenter(new Presenter("Manlio", "Vaccalluzzo", new Date()));
+		presenters.addPresenter(new Presenter("Massimiliano", "Pepe", new Date()));
+		presenters.addPresenter(new Presenter("Pino", "", new Date()));
+		presenters.addPresenter(new Presenter("Franco", "Sellitto", new Date()));
 
 		try {
 			/* Graphical components of main BorderPane */

@@ -1,0 +1,5 @@
+Excluded presenters from talk:
+06/05/2017 - Pino 
+06/05/2017 - Chiara Ferrario
+06/05/2017 - Alessandro Misenta
+-----------------------------------------------------------------

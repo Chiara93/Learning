@@ -2,3 +2,8 @@ Excluded presenters from talk:
 05/14/2017 - Chiara Ferrario
 05/14/2017 - Dalia Liguori
 -----------------------------------------------------------------
+Excluded presenters from talk:
+06/05/2017 - Franco Sellitto
+06/05/2017 - Gennaro 
+06/05/2017 - Chiara Ferrario
+-----------------------------------------------------------------
