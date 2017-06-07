@@ -6,10 +6,11 @@ class OrderItem {
     private int _quantity;
     private int _unitPrice;
  
-    public OrderItem(int prodID, int ImageID, int inQty) {
+    public OrderItem(int prodID, int ImageID, int inQty, int unitPrice) {
         _productID = prodID;
         _imageID = ImageID;
         _quantity = inQty;
+        _unitPrice = unitPrice;
     }
  
     int getProductID() {
@@ -37,7 +38,7 @@ class OrderItem {
     }
  
     public void setQty(int qty) {
-        this._quantity = qty;
+        _quantity = qty;
     }
  
     public void setUnitPrice(int i) {

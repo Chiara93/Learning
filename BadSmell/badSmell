@@ -1,0 +1,24 @@
+Bad smells in code:
+
+- Cambierei i nomi delle classi poiché non sono esplicativi di ciò che rappresentano. Userei la notazione CamelCase e la prima lettera maiuscola.
+
+Classe lineItem:
+- Rinominerei in OrderItem poiché rappresenta un item dell'oggetto Order
+- Rinominerei anche le variabile d'istanza con la notazione _nomeCampo
+- Il campo Vector in essa contenuto mi sembra inutile.
+- Aggiungerei nel costruttore il parametro unitPrice poiché viene usato nel metodo getTotal()
+
+Classe lineitemList:
+- Se dovessi mantenerla la rinominerei
+- Mi sembra inutile avere questo oggetto intermedio per salvare un Vector e nessuna informazione aggiuntiva
+- Sposterei il campo vector nella classe Order e eliminerei questa classe
+
+Classe Order:
+- Cambierei il campo per salvare direttamente un Vector
+- metodo writeOrder troppo lungo, proverei ad estrarre metodi più piccoli e magari anche a spostarli nelle rispettive classi
+- codice duplicato in getTotal() e writeOrder(), proverei a compattarli ed eliminare getTotal() delegando ai singoli item il calcolo del loro total
+- metodo saveOrder() potrebbe essere rinominato così da non dover necessitare di un commento per capire che si tratta
+  del salvataggio dell'oggetto Order su DB. Lo rinominerei in saveOrderToDb()
+- eliminerei il metodo setConnection() usato solo per settare a null la connessione 
+
+
