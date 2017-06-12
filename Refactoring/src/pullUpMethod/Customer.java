@@ -17,4 +17,8 @@ public abstract class Customer {
 	}
 
 	abstract protected double chargeFor(Date lastBillDate, Date date);
+	
+	public double getTotal() {
+		return _total;
+	}
 }

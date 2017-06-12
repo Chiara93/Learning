@@ -1,5 +1,7 @@
 package extractMethod;
 
+import static org.junit.Assert.*;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Vector;
@@ -34,5 +36,6 @@ public class ExtractMethodTest {
 				"name:Chiara\n" +
 				"amount9.0\n";
 		method.printOwing();
+		assertEquals(expected,outContent.toString());
 	}
 }
