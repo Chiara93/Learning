@@ -26,7 +26,7 @@ public class MainApp {
 	}
 
 	private static List<String> toList(String presentersPathFile) {
-		List<String> result = new ArrayList<>();		
+		List<String> result = new ArrayList<String>();		
 		BufferedReader br = null;
 		FileReader fr = null;
 		try {
