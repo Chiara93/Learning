@@ -11,4 +11,8 @@ public class PrintFactory {
 	public String printCsv(Seminar seminar) {
 		return new PrinterCSV().print(seminar);
 	}
+	
+	public String printRaw(Seminar seminar) {
+		return new PrinterRaw().print(seminar);
+	}
 }

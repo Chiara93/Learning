@@ -2,7 +2,6 @@ package com;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Arrays;
 
 import javax.naming.InitialContext;
@@ -13,12 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import org.sqlite.javax.SQLiteConnectionPoolDataSource;
-
 import com.app.controller.Context;
 import com.app.controller.Controller;
 import com.app.controller.MainController;
-import com.zaxxer.hikari.HikariDataSource;
 
 public class Servlet extends HttpServlet {
 
@@ -56,7 +52,7 @@ public class Servlet extends HttpServlet {
 				} catch (Exception e) {
 					resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 					throw new RuntimeException(e);
-				}
+				} 
 			}
 		}
 		resp.setStatus(HttpServletResponse.SC_NOT_FOUND);

@@ -34,6 +34,9 @@ public class MainController implements Controller {
 			context.response().setContentType("text/csv");	
 		    context.response().setHeader("Content-Disposition", "attachment; filename=" + "\"" + seminar.course().name() + ".csv\"");       
 		    context.response().getWriter().write(new PrintFactory().printCsv(seminar));
+		} else if(context.request().getRequestURI().equals("/course/raw")) {
+			context.response().setContentType("text/plain");
+			context.response().getWriter().write(new PrintFactory().printRaw(seminar));
 		}
 	}
 }
