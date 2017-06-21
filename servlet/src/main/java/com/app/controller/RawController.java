@@ -8,11 +8,11 @@ import com.app.model.Student;
 
 import utils.PrintFactory;
 
-public class HtmlController implements Controller{
+public class RawController implements Controller{
 
 	@Override
 	public boolean handles(String route) {
-		return "/course/html".equals(route);
+		return "/course/raw".equals(route);
 	}
 
 	@Override
@@ -22,8 +22,7 @@ public class HtmlController implements Controller{
 		seminar.enroll(new Student("Katia", "Ferrario"));
 		
 		context.response().setCharacterEncoding("UTF-8");
-		context.response().setContentType("text/html");
-		context.response().getWriter().write(new PrintFactory().printHtml(seminar));
+		context.response().setContentType("text/plain");
+		context.response().getWriter().write(new PrintFactory().printRaw(seminar));
 	}
-
 }

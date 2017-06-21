@@ -8,11 +8,11 @@ import com.app.model.Student;
 
 import utils.PrintFactory;
 
-public class HtmlController implements Controller{
+public class CsvController implements Controller{
 
 	@Override
 	public boolean handles(String route) {
-		return "/course/html".equals(route);
+		return "/course/csv".equals(route);
 	}
 
 	@Override
@@ -22,8 +22,9 @@ public class HtmlController implements Controller{
 		seminar.enroll(new Student("Katia", "Ferrario"));
 		
 		context.response().setCharacterEncoding("UTF-8");
-		context.response().setContentType("text/html");
-		context.response().getWriter().write(new PrintFactory().printHtml(seminar));
+		context.response().setContentType("text/csv");	
+	    context.response().setHeader("Content-Disposition", "attachment; filename=" + "\"" + seminar.course().name() + ".csv\"");       
+	    context.response().getWriter().write(new PrintFactory().printCsv(seminar));
 	}
 
 }
