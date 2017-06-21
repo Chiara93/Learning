@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import com.app.controller.Context;
 import com.app.controller.Controller;
+import com.app.controller.CreateCourseController;
 import com.app.controller.CsvController;
 import com.app.controller.HtmlController;
 import com.app.controller.MainController;
@@ -43,7 +44,7 @@ public class Servlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		for(Controller c : Arrays.asList(new MainController(), new HtmlController(), new CsvController(), new RawController())){
+		for(Controller c : Arrays.asList(new MainController(), new HtmlController(), new CsvController(), new RawController(), new CreateCourseController())){
 			if(c.handles(req.getRequestURI())){
 				try {
 					Connection connection = _ds.getConnection();
@@ -59,5 +60,16 @@ public class Servlet extends HttpServlet {
 			}
 		}
 		resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+		try {
+			doGet(req, resp);
+		} catch (ServletException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
