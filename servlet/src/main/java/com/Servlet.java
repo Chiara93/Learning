@@ -15,10 +15,9 @@ import javax.sql.DataSource;
 import com.app.controller.Context;
 import com.app.controller.Controller;
 import com.app.controller.CreateCourseController;
-import com.app.controller.CsvController;
-import com.app.controller.HtmlController;
 import com.app.controller.MainController;
-import com.app.controller.RawController;
+import com.app.controller.ShowCourseController;
+import com.app.view.NotFound404Layout;
 
 public class Servlet extends HttpServlet {
 
@@ -44,7 +43,7 @@ public class Servlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		for(Controller c : Arrays.asList(new MainController(), new HtmlController(), new CsvController(), new RawController(), new CreateCourseController())){
+		for(Controller c : Arrays.asList(new MainController(), new CreateCourseController(), new ShowCourseController())){
 			if(c.handles(req.getRequestURI())){
 				try {
 					Connection connection = _ds.getConnection();
@@ -60,6 +59,7 @@ public class Servlet extends HttpServlet {
 			}
 		}
 		resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		resp.getWriter().write(new NotFound404Layout().build().render());
 	}
 	
 	@Override
