@@ -2,7 +2,6 @@ package com;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.Arrays;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -14,9 +13,7 @@ import javax.sql.DataSource;
 
 import com.app.controller.Context;
 import com.app.controller.Controller;
-import com.app.controller.CreateCourseController;
-import com.app.controller.MainController;
-import com.app.controller.ShowCourseController;
+import com.app.controller.ControllerFactory;
 import com.app.view.NotFound404Layout;
 
 public class Servlet extends HttpServlet {
@@ -29,8 +26,9 @@ public class Servlet extends HttpServlet {
 //	private HikariDataSource _ds;
 //  _ds = new HikariDataSource();
 //	_ds.setJdbcUrl("jdbc:sqlite:/path");
-	
+
 	private DataSource _ds;
+	
 	
 	@Override
 	public void init() throws ServletException {
@@ -43,7 +41,8 @@ public class Servlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		for(Controller c : Arrays.asList(new MainController(), new CreateCourseController(), new ShowCourseController())){
+		
+		for(Controller c : ControllerFactory.controllers()){
 			if(c.handles(req.getRequestURI())){
 				try {
 					Connection connection = _ds.getConnection();
@@ -58,6 +57,7 @@ public class Servlet extends HttpServlet {
 				} 
 			}
 		}
+		resp.setContentType("text/html;charset=UTF-8");
 		resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		resp.getWriter().write(new NotFound404Layout().build().render());
 	}

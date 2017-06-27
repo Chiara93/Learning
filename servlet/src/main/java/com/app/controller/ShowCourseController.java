@@ -6,7 +6,7 @@ public class ShowCourseController implements Controller {
 
 	@Override
 	public boolean handles(String route) {
-		return "/course".equals(route);
+		return "/course".equals(route) || "/course/".equals(route);
 	}
 
 	@Override
