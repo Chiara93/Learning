@@ -87,7 +87,7 @@ public class CreateCourseLayout {
 	public DomContent buildValidatedForm(Validator validator) {
 		DomContent formElement =
 				 form().withClass("form-horizontal").withRole("form").withMethod("post").withAction("/course/create").with(
-					createValidatedInput("Name", Rule.COURSE_NAME, Rule.COURSE_NAME, validator.get(Rule.COURSE_NAME), validator.validate().get(Rule.COURSE_NAME)),
+					//createValidatedInput("Name", Rule.COURSE_NAME, Rule.COURSE_NAME, validator.get(Rule.COURSE_NAME), validator.validate().get(Rule.COURSE_NAME)),
 					//createValidatedInput("Number", Rule.COURSE_NUMBER, Rule.COURSE_NUMBER, validator.get(Rule.COURSE_NUMBER), validator.validate().get(Rule.COURSE_NUMBER)),
 					createValidatedInput("Location", Rule.COURSE_LOCATION, Rule.COURSE_LOCATION, validator.get(Rule.COURSE_LOCATION), validator.validate().get(Rule.COURSE_LOCATION))//,
 					//createValidatedInput("Seats", Rule.COURSE_SEATS, Rule.COURSE_SEATS, validator.get(Rule.COURSE_SEATS), validator.validate().get(Rule.COURSE_SEATS)),
