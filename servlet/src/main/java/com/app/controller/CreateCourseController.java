@@ -48,22 +48,31 @@ public class CreateCourseController implements Controller{
 		Map<String, Collection<Rule>> rules =  new HashMap<>();
 		Map<String, String> requestFields = new HashMap<>();
 		
-		rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule()));
-		rules.put(Rule.COURSE_LOCATION, Arrays.asList(new NotEmptyRule()));
-		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule()));
-		rules.put(Rule.COURSE_DESCRIPTION, Arrays.asList());
+		String name = request.getParameter(Rule.COURSE_NAME);
+		String number = request.getParameter(Rule.COURSE_NUMBER);
+		String start = request.getParameter(Rule.COURSE_START);
+		String location = request.getParameter(Rule.COURSE_LOCATION);
+		String seats = request.getParameter(Rule.COURSE_SEATS);
+		String description = request.getParameter(Rule.COURSE_DESCRIPTION);
 		
-		requestFields.put(Rule.COURSE_NAME, request.getParameter(Rule.COURSE_NAME));
-		//requestFields.put(Rule.COURSE_NUMBER, request.getParameter(Rule.COURSE_NUMBER).isEmpty() ? "0" : request.getParameter(Rule.COURSE_NUMBER));
-		requestFields.put(Rule.COURSE_LOCATION, request.getParameter(Rule.COURSE_LOCATION));
-		requestFields.put(Rule.COURSE_SEATS, request.getParameter(Rule.COURSE_SEATS));
-		requestFields.put(Rule.COURSE_DESCRIPTION, request.getParameter(Rule.COURSE_DESCRIPTION));
+		rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule()));
+		//rules.put(Rule.COURSE_START, Arrays.asList(new NotEmptyRule()));
+		rules.put(Rule.COURSE_LOCATION, Arrays.asList(new NotEmptyRule()));
+		/*rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new IsPositiveNumber()));
+		rules.put(Rule.COURSE_DESCRIPTION, Arrays.asList());*/
+		
+		requestFields.put(Rule.COURSE_NAME, name);
+		/*requestFields.put(Rule.COURSE_NUMBER, number);
+		requestFields.put(Rule.COURSE_START, start);*/
+		requestFields.put(Rule.COURSE_LOCATION, location);
+		/*requestFields.put(Rule.COURSE_SEATS, seats);
+		requestFields.put(Rule.COURSE_DESCRIPTION, description);*/
 		
 		Validator validator = new Validator(rules, requestFields);
 		if(validator.isValid()) {
 			SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-			Course course = new Course(request.getParameter("name"), Integer.parseInt(request.getParameter("number")), request.getParameter("description"));
-			Seminar seminar = new Seminar(course, request.getParameter("location"), format.parse(request.getParameter("start")), Integer.parseInt(request.getParameter("seats")));
+			Course course = new Course(name, Integer.parseInt(number), description);
+			Seminar seminar = new Seminar(course, location, format.parse(start), Integer.parseInt(seats));
 			if(seminars.add(seminar)) {
 				response.sendRedirect("/course");
 			}

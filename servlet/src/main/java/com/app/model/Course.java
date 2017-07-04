@@ -1,25 +1,25 @@
 package com.app.model;
 
 public class Course {
-	private final String _courseName;
-	private final int _courseNumber;
-	private final String _courseDescription;
+	private final String _name;
+	private final int _number;
+	private final String _description;
 	
-	public Course(final String courseName, final int courseNumber, final String courseDescription) {
-		_courseName = courseName;
-		_courseNumber = courseNumber;
-		_courseDescription = courseDescription;
+	public Course(final String name, final int number, final String description) {
+		_name = name;
+		_number = number;
+		_description = description;
 	}
 
 	public String name() {
-		return _courseName;
+		return _name;
 	}
 
 	public int number() {
-		return _courseNumber;
+		return _number;
 	}
 
 	public String description() {
-		return _courseDescription;
+		return _description;
 	}	
 }

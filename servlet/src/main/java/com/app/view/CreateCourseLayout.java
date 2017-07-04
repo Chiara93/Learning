@@ -48,7 +48,7 @@ public class CreateCourseLayout {
 						div().withClass("form-group").with(
 							label("Number").withClass("col-sm-2 control-label").attr("for", "number"),
 							div().withClass("col-sm-10").with(
-								input().withClass("form-control").withType("number").withId("number").withName("number")
+								input().withClass("form-control").withType("text").withId("number").withName("number")
 							)
 						),
 						div().withClass("form-group").with(
@@ -66,7 +66,7 @@ public class CreateCourseLayout {
 						div().withClass("form-group").with(
 							label("Seats").withClass("col-sm-2 control-label").attr("for", "seats"),
 							div().withClass("col-sm-10").with(
-								input().withClass("form-control").withType("number").withId("seats").withName("seats")
+								input().withClass("form-control").withType("text").withId("seats").withName("seats")
 							)
 						),
 						div().withClass("form-group").with(
@@ -89,9 +89,9 @@ public class CreateCourseLayout {
 				 form().withClass("form-horizontal").withRole("form").withMethod("post").withAction("/course/create").with(
 					createValidatedInput("Name", Rule.COURSE_NAME, Rule.COURSE_NAME, validator.get(Rule.COURSE_NAME), validator.validate().get(Rule.COURSE_NAME)),
 					//createValidatedInput("Number", Rule.COURSE_NUMBER, Rule.COURSE_NUMBER, validator.get(Rule.COURSE_NUMBER), validator.validate().get(Rule.COURSE_NUMBER)),
-					createValidatedInput("Location", Rule.COURSE_LOCATION, Rule.COURSE_LOCATION, validator.get(Rule.COURSE_LOCATION), validator.validate().get(Rule.COURSE_LOCATION)),
-					createValidatedInput("Seats", Rule.COURSE_SEATS, Rule.COURSE_SEATS, validator.get(Rule.COURSE_SEATS), validator.validate().get(Rule.COURSE_SEATS)),
-					createValidatedInput("Description", Rule.COURSE_DESCRIPTION, Rule.COURSE_DESCRIPTION, validator.get(Rule.COURSE_DESCRIPTION), validator.validate().get(Rule.COURSE_DESCRIPTION))
+					createValidatedInput("Location", Rule.COURSE_LOCATION, Rule.COURSE_LOCATION, validator.get(Rule.COURSE_LOCATION), validator.validate().get(Rule.COURSE_LOCATION))//,
+					//createValidatedInput("Seats", Rule.COURSE_SEATS, Rule.COURSE_SEATS, validator.get(Rule.COURSE_SEATS), validator.validate().get(Rule.COURSE_SEATS)),
+					//createValidatedInput("Description", Rule.COURSE_DESCRIPTION, Rule.COURSE_DESCRIPTION, validator.get(Rule.COURSE_DESCRIPTION), validator.validate().get(Rule.COURSE_DESCRIPTION))
 				);
 		return build(formElement);
 	}
