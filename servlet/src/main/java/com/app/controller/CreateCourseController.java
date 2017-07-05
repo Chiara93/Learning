@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.app.model.Course;
 import com.app.model.Seminar;
+import com.app.validation.IsPositiveNumber;
 import com.app.validation.NotEmptyRule;
 import com.app.validation.Rule;
 import com.app.validation.Validator;
@@ -55,18 +56,18 @@ public class CreateCourseController implements Controller{
 		String seats = request.getParameter(Rule.COURSE_SEATS);
 		String description = request.getParameter(Rule.COURSE_DESCRIPTION);
 		
-		//rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule()));
-		//rules.put(Rule.COURSE_START, Arrays.asList(new NotEmptyRule()));
+		rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule()));
+		rules.put(Rule.COURSE_START, Arrays.asList(new NotEmptyRule()));
 		rules.put(Rule.COURSE_LOCATION, Arrays.asList(new NotEmptyRule()));
-		/*rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new IsPositiveNumber()));
-		rules.put(Rule.COURSE_DESCRIPTION, Arrays.asList());*/
+		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new IsPositiveNumber()));
+		rules.put(Rule.COURSE_DESCRIPTION, Arrays.asList());
 		
-		//requestFields.put(Rule.COURSE_NAME, name);
-		/*requestFields.put(Rule.COURSE_NUMBER, number);
-		requestFields.put(Rule.COURSE_START, start);*/
+		requestFields.put(Rule.COURSE_NAME, name);
+		requestFields.put(Rule.COURSE_NUMBER, number);
+		requestFields.put(Rule.COURSE_START, start);
 		requestFields.put(Rule.COURSE_LOCATION, location);
-		/*requestFields.put(Rule.COURSE_SEATS, seats);
-		requestFields.put(Rule.COURSE_DESCRIPTION, description);*/
+		requestFields.put(Rule.COURSE_SEATS, seats);
+		requestFields.put(Rule.COURSE_DESCRIPTION, description);
 		
 		Validator validator = new Validator(rules, requestFields);
 		if(validator.isValid()) {

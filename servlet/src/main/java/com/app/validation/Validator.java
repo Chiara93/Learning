@@ -28,12 +28,20 @@ public class Validator {
 			}
 			if(errorKeyFound)
 				errors.put(key, rulesErrors);
+			errorKeyFound = false;
 		}
 		return errors;
 	}
 	
 	public boolean isValid() {
-		return validate().isEmpty();
+		Map<String, Set<String>> result = validate();
+		for (String key : result.keySet()) {
+			for (String el : result.get(key)) {
+				System.out.println(key + " - " + el);
+			}
+		}
+		System.out.println("-------------------------------");
+		return result.isEmpty();
 	}
 
 	public String get(String key) {

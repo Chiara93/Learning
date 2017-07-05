@@ -87,18 +87,18 @@ public class CreateCourseLayout {
 	public DomContent buildValidatedForm(Validator validator) {
 		DomContent formElement =
 				 form().withClass("form-horizontal").withRole("form").withMethod("post").withAction("/course/create").with(
-					//createValidatedInput("Name", Rule.COURSE_NAME, Rule.COURSE_NAME, validator.get(Rule.COURSE_NAME), validator.validate().get(Rule.COURSE_NAME)),
-					//createValidatedInput("Number", Rule.COURSE_NUMBER, Rule.COURSE_NUMBER, validator.get(Rule.COURSE_NUMBER), validator.validate().get(Rule.COURSE_NUMBER)),
-					createValidatedInput("Location", Rule.COURSE_LOCATION, Rule.COURSE_LOCATION, validator.get(Rule.COURSE_LOCATION), validator.validate().get(Rule.COURSE_LOCATION))//,
-					//createValidatedInput("Seats", Rule.COURSE_SEATS, Rule.COURSE_SEATS, validator.get(Rule.COURSE_SEATS), validator.validate().get(Rule.COURSE_SEATS)),
-					//createValidatedInput("Description", Rule.COURSE_DESCRIPTION, Rule.COURSE_DESCRIPTION, validator.get(Rule.COURSE_DESCRIPTION), validator.validate().get(Rule.COURSE_DESCRIPTION))
+					createValidatedInput("Name", Rule.COURSE_NAME, Rule.COURSE_NAME, validator.get(Rule.COURSE_NAME), validator.validate().get(Rule.COURSE_NAME)),
+					createValidatedInput("Number", Rule.COURSE_NUMBER, Rule.COURSE_NUMBER, validator.get(Rule.COURSE_NUMBER), validator.validate().get(Rule.COURSE_NUMBER)),
+					createValidatedInput("Location", Rule.COURSE_LOCATION, Rule.COURSE_LOCATION, validator.get(Rule.COURSE_LOCATION), validator.validate().get(Rule.COURSE_LOCATION)),
+					createValidatedInput("Seats", Rule.COURSE_SEATS, Rule.COURSE_SEATS, validator.get(Rule.COURSE_SEATS), validator.validate().get(Rule.COURSE_SEATS)),
+					createValidatedInput("Description", Rule.COURSE_DESCRIPTION, Rule.COURSE_DESCRIPTION, validator.get(Rule.COURSE_DESCRIPTION), validator.validate().get(Rule.COURSE_DESCRIPTION))
 				);
 		return build(formElement);
 	}
 
 	private ContainerTag createValidatedInput(String label, String id, String name, String value, Collection<String> errors) {
 		ContainerTag input = 
-				div().withClass(errors.isEmpty() ? "form-group has-success has-feedback" : "form-group has-error has-feedback").with(
+				div().withClass(errors == null ? "form-group has-success has-feedback" : "form-group has-error has-feedback").with(
 					label(label).withClass("col-sm-2 control-label").attr("for", label),
 					div().withClass("col-sm-10").with(
 						input().withClass("form-control")
@@ -106,14 +106,18 @@ public class CreateCourseLayout {
 							   .withId(id)
 							   .withName(name)
 							   .withValue(value),
-						span().withClass(errors.isEmpty() ? "glyphicon glyphicon-ok form-control-feedback" : "glyphicon glyphicon-remove form-control-feedback"),
-						span(errors.isEmpty() ? "success" : "error").withClass("sr-only")
+						span().withClass(errors == null ? "glyphicon glyphicon-ok form-control-feedback" : "glyphicon glyphicon-remove form-control-feedback"),
+						span(errors == null ? "success" : "error").withClass("sr-only")
 					)
 				);
-				for (String message : errors) {
-					input.with(span(message.isEmpty() ? label + " is valid" : message).withClass("help-block"));
+				if(errors != null) {
+					input.with(span("Please insert a valid " + id).withClass("help-block"));
 				}
-				
+				/*if(errors != null) {
+					for (String message : errors) {
+						input.with(span(message).withClass("help-block"));
+					}
+				}*/
 		return input;
 	}
 	
