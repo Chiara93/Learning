@@ -2,11 +2,11 @@ package com.app.validation;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class LessOrEqualThan extends Rule {
+public class LessOrEqualThanRule extends Rule {
 	
 	private final String _toCompare;
 	
-	public LessOrEqualThan(String toCompare) {
+	public LessOrEqualThanRule(String toCompare) {
 		_toCompare = toCompare;
 	}
 	

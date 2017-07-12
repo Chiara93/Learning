@@ -10,9 +10,9 @@ public class Validator {
 	private final Map<String, Collection<Rule>> _rules;
 	private final Map<String, String> _requestFields;
 	
-	public Validator(Map<String, Collection<Rule>> rules, Map<String, String> requestField) {
+	public Validator(Map<String, Collection<Rule>> rules, Map<String, String> requestFields) {
 		_rules = rules;
-		_requestFields = requestField;
+		_requestFields = requestFields;
 	}
 	
 	public Map<String, Set<String>> validate() {
@@ -22,7 +22,6 @@ public class Validator {
 			Set<String> rulesErrors = new HashSet<>();
 			for (Rule rule : _rules.get(key)) {
 				if(!rule.check(_requestFields.get(key))) {
-					System.out.println(key + rule.check(_requestFields.get(key)));
 					errorKeyFound = true;
 					rulesErrors.add(rule.message());
 				}
@@ -35,13 +34,6 @@ public class Validator {
 	}
 	
 	public boolean isValid() {
-		/*Map<String, Set<String>> result = validate();
-		for (String key : result.keySet()) {
-			for (String el : result.get(key)) {
-				System.out.println(key + " - " + el);
-			}
-		}
-		System.out.println("-------------------------------");*/
 		return validate().isEmpty();
 	}
 

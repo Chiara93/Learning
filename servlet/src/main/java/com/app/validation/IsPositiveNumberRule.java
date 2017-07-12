@@ -2,7 +2,7 @@ package com.app.validation;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class IsPositiveNumber extends Rule {
+public class IsPositiveNumberRule extends Rule {
 
 	@Override
 	public boolean check(String field) {

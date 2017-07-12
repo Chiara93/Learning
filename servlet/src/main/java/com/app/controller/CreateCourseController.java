@@ -13,12 +13,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.app.model.Course;
 import com.app.model.Seminar;
-import com.app.validation.IsPositiveNumber;
-import com.app.validation.LessOrEqualThan;
+import com.app.validation.IsPositiveNumberRule;
+import com.app.validation.IsValidDateFormatRule;
+import com.app.validation.LessOrEqualThanRule;
 import com.app.validation.NotEmptyRule;
 import com.app.validation.Rule;
 import com.app.validation.Validator;
@@ -38,7 +37,6 @@ public class CreateCourseController implements Controller{
 		HttpServletRequest request = context.request();
 		HttpServletResponse response = context.response();
 		
-		System.out.println("Test: " + StringUtils.isNumeric("0"));
 		if("GET".equals(request.getMethod())) {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html");
@@ -61,10 +59,10 @@ public class CreateCourseController implements Controller{
 		String description = request.getParameter(Rule.COURSE_DESCRIPTION);
 		
 		rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule()));
-		rules.put(Rule.COURSE_NUMBER, Arrays.asList(new IsPositiveNumber(), new LessOrEqualThan(seats)));
-		rules.put(Rule.COURSE_START, Arrays.asList(new NotEmptyRule()));
+		rules.put(Rule.COURSE_NUMBER, Arrays.asList(new IsPositiveNumberRule(), new LessOrEqualThanRule(seats)));
+		rules.put(Rule.COURSE_START, Arrays.asList(new NotEmptyRule(), new IsValidDateFormatRule()));
 		rules.put(Rule.COURSE_LOCATION, Arrays.asList(new NotEmptyRule()));
-		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new IsPositiveNumber()));
+		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new IsPositiveNumberRule()));
 		rules.put(Rule.COURSE_DESCRIPTION, Arrays.asList());
 		
 		requestFields.put(Rule.COURSE_NAME, name);
