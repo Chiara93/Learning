@@ -42,8 +42,7 @@ public class CreateCourseController implements Controller{
 			response.setContentType("text/html");
 			response.getWriter().write(new CreateCourseLayout().buildForm().render());
 		} else if("POST".equals(request.getMethod())) {
-			validateForm(response, request);
-			
+			validateForm(response, request);			
 		}
 	}
 	
