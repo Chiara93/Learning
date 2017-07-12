@@ -22,6 +22,7 @@ public class Validator {
 			Set<String> rulesErrors = new HashSet<>();
 			for (Rule rule : _rules.get(key)) {
 				if(!rule.check(_requestFields.get(key))) {
+					System.out.println(key + rule.check(_requestFields.get(key)));
 					errorKeyFound = true;
 					rulesErrors.add(rule.message());
 				}
@@ -34,14 +35,14 @@ public class Validator {
 	}
 	
 	public boolean isValid() {
-		Map<String, Set<String>> result = validate();
+		/*Map<String, Set<String>> result = validate();
 		for (String key : result.keySet()) {
 			for (String el : result.get(key)) {
 				System.out.println(key + " - " + el);
 			}
 		}
-		System.out.println("-------------------------------");
-		return result.isEmpty();
+		System.out.println("-------------------------------");*/
+		return validate().isEmpty();
 	}
 
 	public String get(String key) {

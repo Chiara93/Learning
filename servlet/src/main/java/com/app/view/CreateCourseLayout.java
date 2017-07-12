@@ -89,11 +89,23 @@ public class CreateCourseLayout {
 				 form().withClass("form-horizontal").withRole("form").withMethod("post").withAction("/course/create").with(
 					createValidatedInput("Name", Rule.COURSE_NAME, Rule.COURSE_NAME, validator.get(Rule.COURSE_NAME), validator.validate().get(Rule.COURSE_NAME)),
 					createValidatedInput("Number", Rule.COURSE_NUMBER, Rule.COURSE_NUMBER, validator.get(Rule.COURSE_NUMBER), validator.validate().get(Rule.COURSE_NUMBER)),
+					createValidatedInput("Start", Rule.COURSE_START, Rule.COURSE_START, validator.get(Rule.COURSE_START), validator.validate().get(Rule.COURSE_START)),
 					createValidatedInput("Location", Rule.COURSE_LOCATION, Rule.COURSE_LOCATION, validator.get(Rule.COURSE_LOCATION), validator.validate().get(Rule.COURSE_LOCATION)),
 					createValidatedInput("Seats", Rule.COURSE_SEATS, Rule.COURSE_SEATS, validator.get(Rule.COURSE_SEATS), validator.validate().get(Rule.COURSE_SEATS)),
-					createValidatedInput("Description", Rule.COURSE_DESCRIPTION, Rule.COURSE_DESCRIPTION, validator.get(Rule.COURSE_DESCRIPTION), validator.validate().get(Rule.COURSE_DESCRIPTION))
-				);
+					createValidatedInput("Description", Rule.COURSE_DESCRIPTION, Rule.COURSE_DESCRIPTION, validator.get(Rule.COURSE_DESCRIPTION), validator.validate().get(Rule.COURSE_DESCRIPTION)),
+					createSubmitButton()
+				 );
 		return build(formElement);
+	}
+
+	private ContainerTag createSubmitButton() {
+		ContainerTag submit =
+				div().withClass("form-group").with(			            					
+				div().withClass("col-sm-10 col-sm-offset-2").with(
+						input().withClass("btn btn-primary").withId("submit").withName("submit").withType("submit").withValue("Send")
+					)
+				);
+		return submit;
 	}
 
 	private ContainerTag createValidatedInput(String label, String id, String name, String value, Collection<String> errors) {

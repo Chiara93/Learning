@@ -13,9 +13,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.app.model.Course;
 import com.app.model.Seminar;
 import com.app.validation.IsPositiveNumber;
+import com.app.validation.LessOrEqualThan;
 import com.app.validation.NotEmptyRule;
 import com.app.validation.Rule;
 import com.app.validation.Validator;
@@ -35,6 +38,7 @@ public class CreateCourseController implements Controller{
 		HttpServletRequest request = context.request();
 		HttpServletResponse response = context.response();
 		
+		System.out.println("Test: " + StringUtils.isNumeric("0"));
 		if("GET".equals(request.getMethod())) {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html");
@@ -50,13 +54,14 @@ public class CreateCourseController implements Controller{
 		Map<String, String> requestFields = new HashMap<>();
 		
 		String name = request.getParameter(Rule.COURSE_NAME);
-		String number = request.getParameter(Rule.COURSE_NUMBER);
+		String number = request.getParameter(Rule.COURSE_NUMBER).isEmpty() ? "0" : request.getParameter(Rule.COURSE_NUMBER);
 		String start = request.getParameter(Rule.COURSE_START);
 		String location = request.getParameter(Rule.COURSE_LOCATION);
 		String seats = request.getParameter(Rule.COURSE_SEATS);
 		String description = request.getParameter(Rule.COURSE_DESCRIPTION);
 		
 		rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule()));
+		rules.put(Rule.COURSE_NUMBER, Arrays.asList(new IsPositiveNumber(), new LessOrEqualThan(seats)));
 		rules.put(Rule.COURSE_START, Arrays.asList(new NotEmptyRule()));
 		rules.put(Rule.COURSE_LOCATION, Arrays.asList(new NotEmptyRule()));
 		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new IsPositiveNumber()));
