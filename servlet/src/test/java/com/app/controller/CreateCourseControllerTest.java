@@ -4,10 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class MainControllerTest {
-
+public class CreateCourseControllerTest {
 	@Test
 	public void handlesRoute() throws Exception {
-		assertTrue(new MainController().handles("/"));
+		assertTrue(new CreateCourseController().handles("/course/create"));
 	}
 }

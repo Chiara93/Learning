@@ -19,19 +19,18 @@ public class ValidatorTest {
 		Map<String, Collection<Rule>> rules =  new HashMap<>();
 		Map<String, String> requestFields = new HashMap<>();
 		
-		rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule()));
-		rules.put(Rule.COURSE_NUMBER, Arrays.asList(new IsPositiveNumberRule(), new LessOrEqualThanRule("30")));
+		rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule(), new MaxLengthRule(Rule.MAX_LENGTH_NAME)));
+		rules.put(Rule.COURSE_NUMBER, Arrays.asList(new NotEmptyRule()));
 		rules.put(Rule.COURSE_START, Arrays.asList(new NotEmptyRule(), new IsValidDateFormatRule()));
-		rules.put(Rule.COURSE_LOCATION, Arrays.asList(new NotEmptyRule()));
-		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new IsPositiveNumberRule()));
-		rules.put(Rule.COURSE_DESCRIPTION, Arrays.asList());
+		rules.put(Rule.COURSE_LOCATION, Arrays.asList(new NotEmptyRule(), new MaxLengthRule(Rule.MAX_LENGTH_LOCATION)));
+		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new IsPositiveNumberRule(), new MaxLengthRule(Rule.MAX_LENGTH_SEATS), new LowerThanRule()));
 		
 		requestFields.put(Rule.COURSE_NAME, "Maths");
-		requestFields.put(Rule.COURSE_NUMBER, "0");
+		requestFields.put(Rule.COURSE_NUMBER, "101");
 		requestFields.put(Rule.COURSE_START, "20.05.2017");
 		requestFields.put(Rule.COURSE_LOCATION, "Lugano");
 		requestFields.put(Rule.COURSE_SEATS, "30");
-		requestFields.put(Rule.COURSE_DESCRIPTION, "");
+		requestFields.put(Rule.COURSE_DESCRIPTION, "description");
 		
 		_validator = new Validator(rules, requestFields);
 	}
