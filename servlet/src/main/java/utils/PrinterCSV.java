@@ -7,7 +7,7 @@ public class PrinterCSV extends SeminarPrinter {
 	
 	@Override
 	String header(Seminar seminar) {
-		return quote(seminar.course().number()) + ";" +
+		return quote(seminar.course().id()) + ";" +
 				   quote(seminar.course().name()) + ";" +
 				   quote(seminar.course().description()) + ";" +
 				   quote(seminar.location()) + ";" +

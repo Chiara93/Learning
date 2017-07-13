@@ -11,7 +11,7 @@ public class IsPositiveNumberRule extends Rule {
 
 	@Override
 	public String message() {
-		return "Can't be a negative number";
+		return "must be positive number";
 	}
 
 }

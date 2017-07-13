@@ -21,7 +21,7 @@ public class CourseTest {
 	
 	@Test
 	public void numberTest() {
-		assertEquals(1, _course.number());
+		assertEquals(1, _course.id());
 	}
 	
 	@Test

@@ -2,12 +2,12 @@ package com.app.model;
 
 public class Course {
 	private final String _name;
-	private final int _number;
+	private final int _id;
 	private final String _description;
 	
-	public Course(final String name, final int number, final String description) {
+	public Course(final String name, final int id, final String description) {
 		_name = name;
-		_number = number;
+		_id = id;
 		_description = description;
 	}
 
@@ -15,8 +15,8 @@ public class Course {
 		return _name;
 	}
 
-	public int number() {
-		return _number;
+	public int id() {
+		return _id;
 	}
 
 	public String description() {

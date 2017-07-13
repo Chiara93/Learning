@@ -23,7 +23,7 @@ public class IsValidDateFormatRule extends Rule {
 
 	@Override
 	public String message() {
-		return "Date must have format dd.MM.yyyy";
+		return "must have format dd.MM.yyyy";
 	}
 
 }

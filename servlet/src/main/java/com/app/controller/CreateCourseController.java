@@ -17,7 +17,8 @@ import com.app.model.Course;
 import com.app.model.Seminar;
 import com.app.validation.IsPositiveNumberRule;
 import com.app.validation.IsValidDateFormatRule;
-import com.app.validation.LessOrEqualThanRule;
+import com.app.validation.LowerThanRule;
+import com.app.validation.MaxLengthRule;
 import com.app.validation.NotEmptyRule;
 import com.app.validation.Rule;
 import com.app.validation.Validator;
@@ -51,18 +52,17 @@ public class CreateCourseController implements Controller{
 		Map<String, String> requestFields = new HashMap<>();
 		
 		String name = request.getParameter(Rule.COURSE_NAME);
-		String number = request.getParameter(Rule.COURSE_NUMBER).isEmpty() ? "0" : request.getParameter(Rule.COURSE_NUMBER);
+		String number = request.getParameter(Rule.COURSE_NUMBER);
 		String start = request.getParameter(Rule.COURSE_START);
 		String location = request.getParameter(Rule.COURSE_LOCATION);
 		String seats = request.getParameter(Rule.COURSE_SEATS);
 		String description = request.getParameter(Rule.COURSE_DESCRIPTION);
 		
-		rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule()));
-		rules.put(Rule.COURSE_NUMBER, Arrays.asList(new IsPositiveNumberRule(), new LessOrEqualThanRule(seats)));
+		rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule(), new MaxLengthRule(Rule.MAX_LENGTH_NAME)));
+		rules.put(Rule.COURSE_NUMBER, Arrays.asList(new NotEmptyRule()));
 		rules.put(Rule.COURSE_START, Arrays.asList(new NotEmptyRule(), new IsValidDateFormatRule()));
-		rules.put(Rule.COURSE_LOCATION, Arrays.asList(new NotEmptyRule()));
-		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new IsPositiveNumberRule()));
-		rules.put(Rule.COURSE_DESCRIPTION, Arrays.asList());
+		rules.put(Rule.COURSE_LOCATION, Arrays.asList(new NotEmptyRule(), new MaxLengthRule(Rule.MAX_LENGTH_LOCATION)));
+		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new IsPositiveNumberRule(), new MaxLengthRule(Rule.MAX_LENGTH_SEATS), new LowerThanRule()));
 		
 		requestFields.put(Rule.COURSE_NAME, name);
 		requestFields.put(Rule.COURSE_NUMBER, number);

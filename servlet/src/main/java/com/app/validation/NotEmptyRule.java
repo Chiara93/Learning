@@ -1,15 +1,17 @@
 package com.app.validation;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class NotEmptyRule extends Rule {
 
 	@Override
 	public boolean check(String field) {
-		return !field.isEmpty();//StringUtils.isNotEmpty(field);
+		return StringUtils.isNotEmpty(field);
 	}
 
 	@Override
 	public String message() {
-		return "Can't be empty";
+		return "can't be empty";
 	}
 
 }

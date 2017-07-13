@@ -121,17 +121,27 @@ public class CreateCourseLayout {
 						span().withClass(errors == null ? "glyphicon glyphicon-ok form-control-feedback" : "glyphicon glyphicon-remove form-control-feedback"),
 						span(errors == null ? "success" : "error").withClass("sr-only")
 					)
-				);
+				);		
+		
 				if(errors != null) {
-					input.with(span("Please insert a valid " + id).withClass("help-block"));
-				}
-				/*if(errors != null) {
+					StringBuilder strb = new StringBuilder();
+					int count = 0;
 					for (String message : errors) {
-						input.with(span(message).withClass("help-block"));
+						strb.append(message);
+						if(count++ != errors.size() - 1) {
+							strb.append(" - ");
+						}
 					}
-				}*/
+					
+					input.with(
+						div().withClass("col-sm-2"),
+						div().withClass("col-sm-10").with(
+							span()
+							.withClass("help-block")
+							.withText(strb.toString())
+						)	
+					);
+				}
 		return input;
 	}
-	
-
 }
