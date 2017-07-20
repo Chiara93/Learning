@@ -21,9 +21,9 @@ public class ValidatorTest {
 		
 		rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule(), new MaxLengthRule(Rule.MAX_LENGTH_NAME)));
 		rules.put(Rule.COURSE_NUMBER, Arrays.asList(new NotEmptyRule()));
-		rules.put(Rule.COURSE_START, Arrays.asList(new NotEmptyRule(), new IsValidDateFormatRule()));
+		rules.put(Rule.COURSE_START, Arrays.asList(new NotEmptyRule(), new ValidDateFormatRule()));
 		rules.put(Rule.COURSE_LOCATION, Arrays.asList(new NotEmptyRule(), new MaxLengthRule(Rule.MAX_LENGTH_LOCATION)));
-		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new IsPositiveNumberRule(), new MaxLengthRule(Rule.MAX_LENGTH_SEATS), new LowerThanRule()));
+		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new PositiveNumberRule(), new MaxLengthRule(Rule.MAX_LENGTH_SEATS), new LowerThanRule()));
 		
 		requestFields.put(Rule.COURSE_NAME, "Maths");
 		requestFields.put(Rule.COURSE_NUMBER, "101");

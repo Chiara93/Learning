@@ -6,7 +6,7 @@ public class ShowCourseController implements Controller {
 
 	@Override
 	public boolean handles(String route) {
-		return "/course".equals(route) || "/course/".equals(route);
+		return "/course".equals(route) || "/course/".equals(route) || "/".equals(route);
 	}
 
 	@Override
@@ -15,5 +15,4 @@ public class ShowCourseController implements Controller {
 		context.response().setContentType("text/html");
 		context.response().getWriter().write(new ShowCourseLayout().build().render());
 	}
-
 }

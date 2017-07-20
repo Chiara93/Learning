@@ -5,13 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class IsValidDateFormatRuleTest {
+public class ValidDateFormatRuleTest {
 	
-	private IsValidDateFormatRule _rule;
+	private ValidDateFormatRule _rule;
 	
 	@Before
 	public void setup() {
-		_rule = new IsValidDateFormatRule();
+		_rule = new ValidDateFormatRule();
 	}
 	
 	@Test

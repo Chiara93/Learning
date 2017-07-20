@@ -5,13 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class IsPositiveNumberRuleTest {
+public class PositiveNumberRuleTest {
 	
-	private IsPositiveNumberRule _rule;
+	private PositiveNumberRule _rule;
 	
 	@Before
 	public void setup() {
-		_rule = new IsPositiveNumberRule();
+		_rule = new PositiveNumberRule();
 	}
 	
 	@Test
