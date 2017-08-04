@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.app.model.Course;
 import com.app.model.Seminar;
-import com.app.validation.PositiveNumberRule;
-import com.app.validation.ValidDateFormatRule;
 import com.app.validation.LowerThanRule;
 import com.app.validation.MaxLengthRule;
 import com.app.validation.NotEmptyRule;
+import com.app.validation.PositiveNumberRule;
 import com.app.validation.Rule;
+import com.app.validation.ValidDateFormatRule;
 import com.app.validation.Validator;
 import com.app.view.CreateCourseLayout;
 
@@ -59,7 +59,7 @@ public class CreateCourseController implements Controller{
 		String description = request.getParameter(Rule.COURSE_DESCRIPTION);
 		
 		rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule(), new MaxLengthRule(Rule.MAX_LENGTH_NAME)));
-		rules.put(Rule.COURSE_NUMBER, Arrays.asList(new NotEmptyRule()));
+		rules.put(Rule.COURSE_NUMBER, Arrays.asList(new NotEmptyRule(), new PositiveNumberRule()));
 		rules.put(Rule.COURSE_START, Arrays.asList(new NotEmptyRule(), new ValidDateFormatRule()));
 		rules.put(Rule.COURSE_LOCATION, Arrays.asList(new NotEmptyRule(), new MaxLengthRule(Rule.MAX_LENGTH_LOCATION)));
 		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new PositiveNumberRule(), new MaxLengthRule(Rule.MAX_LENGTH_SEATS), new LowerThanRule()));
