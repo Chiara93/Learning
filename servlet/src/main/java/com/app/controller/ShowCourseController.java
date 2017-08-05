@@ -11,8 +11,9 @@ public class ShowCourseController implements Controller {
 
 	@Override
 	public void execute(Context context) throws Exception {
-		context.response().setCharacterEncoding("UTF-8");
-		context.response().setContentType("text/html");
+		// PROVA PER VISUALIZZARE HTML
+		//context.response().setCharacterEncoding("UTF-8");
+		//context.response().setContentType("text/html");
 		context.response().getWriter().write(new ShowCourseLayout().build().render());
 	}
 }
