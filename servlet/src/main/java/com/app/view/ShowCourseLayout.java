@@ -77,12 +77,12 @@ public class ShowCourseLayout implements Layout {
 				  								)
 				  							),
 				  							tbody().with(
-				  								each(CreateCourseController.seminars, seminar -> tr(
-				  									td(String.valueOf(seminar.id())),
-				  									td(seminar.name()),
-				  									td(seminar.location()),
-				  									td(String.valueOf(seminar.seatsLeft())),
-				  									td(ValidDateFormatRule.SDF.format(seminar.date()))
+				  								each(CreateCourseController.seminars, course -> tr(
+				  									td(String.valueOf(course.id())),
+				  									td(course.name()),
+				  									td(course.location()),
+				  									td(String.valueOf(course.seatsLeft())),
+				  									td(ValidDateFormatRule.SDF.format(course.date()))
 				  									)
 				  								)
 				  							)

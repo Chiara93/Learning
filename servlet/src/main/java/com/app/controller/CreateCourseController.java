@@ -10,7 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.app.model.Seminar;
+import com.app.model.Course;
 import com.app.validation.Rule;
 import com.app.validation.RuleFactory;
 import com.app.validation.ValidDateFormatRule;
@@ -19,8 +19,8 @@ import com.app.view.CreateCourseLayout;
 
 public class CreateCourseController implements Controller{
 	
-	public static List<Seminar> seminars = new ArrayList<>();
-	private CreateCourseLayout createCourseLayout = new CreateCourseLayout();
+	public static List<Course> seminars = new ArrayList<>();
+	private CreateCourseLayout _createCourseLayout = new CreateCourseLayout();
 	
 	@Override
 	public boolean handles(String route) {
@@ -35,7 +35,7 @@ public class CreateCourseController implements Controller{
 		if("GET".equals(request.getMethod())) {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html");
-			response.getWriter().write(createCourseLayout.buildForm().render());
+			response.getWriter().write(_createCourseLayout.buildForm().render());
 		} else if("POST".equals(request.getMethod())) {
 			validateForm(response, request);			
 		}
@@ -60,14 +60,14 @@ public class CreateCourseController implements Controller{
 		
 		Validator validator = new Validator(RuleFactory.rules(), requestFields);
 		if(validator.isValid()) {
-			Seminar seminar = new Seminar(name, Integer.parseInt(number), description, location, ValidDateFormatRule.SDF.parse(start), Integer.parseInt(seats));
-			if(seminars.add(seminar)) {
+			Course course = new Course(name, Integer.parseInt(number), description, location, ValidDateFormatRule.SDF.parse(start), Integer.parseInt(seats));
+			if(seminars.add(course)) {
 				response.sendRedirect("/course");
 			}
 		} else {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html");
-			response.getWriter().write(createCourseLayout.buildValidatedForm(validator).render());	
+			response.getWriter().write(_createCourseLayout.buildValidatedForm(validator).render());	
 		}
 	}
 }

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Seminar {
+public class Course {
 
 	private final String _name;
 	private final int _id;
@@ -13,7 +13,7 @@ public class Seminar {
 	private final int _seatsLeft;
 	private final List<Student> _students = new ArrayList<Student>();
 	
-	public Seminar(final String name, final int id, final String description, final String location, final Date date, final int seatsLeft) {
+	public Course(final String name, final int id, final String description, final String location, final Date date, final int seatsLeft) {
 		_name = name;
 		_id = id;
 		_description = description;
