@@ -2,10 +2,7 @@ package com.app.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.app.model.Course;
 import com.app.model.Seminar;
-import com.app.validation.LowerThanRule;
-import com.app.validation.MaxLengthRule;
-import com.app.validation.NotEmptyRule;
-import com.app.validation.PositiveNumberRule;
 import com.app.validation.Rule;
+import com.app.validation.RuleFactory;
 import com.app.validation.ValidDateFormatRule;
 import com.app.validation.Validator;
 import com.app.view.CreateCourseLayout;
@@ -27,6 +21,7 @@ import com.app.view.CreateCourseLayout;
 public class CreateCourseController implements Controller{
 	
 	public static List<Seminar> seminars = new ArrayList<>();
+	private CreateCourseLayout createCourseLayout = new CreateCourseLayout();
 	
 	@Override
 	public boolean handles(String route) {
@@ -41,14 +36,13 @@ public class CreateCourseController implements Controller{
 		if("GET".equals(request.getMethod())) {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html");
-			response.getWriter().write(new CreateCourseLayout().buildForm().render());
+			response.getWriter().write(createCourseLayout.buildForm().render());
 		} else if("POST".equals(request.getMethod())) {
 			validateForm(response, request);			
 		}
 	}
 	
 	private void validateForm(HttpServletResponse response, HttpServletRequest request) throws IOException, NumberFormatException, ParseException {
-		Map<String, Collection<Rule>> rules =  new HashMap<>();
 		Map<String, String> requestFields = new HashMap<>();
 		
 		String name = request.getParameter(Rule.COURSE_NAME);
@@ -58,12 +52,6 @@ public class CreateCourseController implements Controller{
 		String seats = request.getParameter(Rule.COURSE_SEATS);
 		String description = request.getParameter(Rule.COURSE_DESCRIPTION);
 		
-		rules.put(Rule.COURSE_NAME, Arrays.asList(new NotEmptyRule(), new MaxLengthRule(Rule.MAX_LENGTH_NAME)));
-		rules.put(Rule.COURSE_NUMBER, Arrays.asList(new NotEmptyRule(), new PositiveNumberRule()));
-		rules.put(Rule.COURSE_START, Arrays.asList(new NotEmptyRule(), new ValidDateFormatRule()));
-		rules.put(Rule.COURSE_LOCATION, Arrays.asList(new NotEmptyRule(), new MaxLengthRule(Rule.MAX_LENGTH_LOCATION)));
-		rules.put(Rule.COURSE_SEATS, Arrays.asList(new NotEmptyRule(), new PositiveNumberRule(), new MaxLengthRule(Rule.MAX_LENGTH_SEATS), new LowerThanRule()));
-		
 		requestFields.put(Rule.COURSE_NAME, name);
 		requestFields.put(Rule.COURSE_NUMBER, number);
 		requestFields.put(Rule.COURSE_START, start);
@@ -71,18 +59,17 @@ public class CreateCourseController implements Controller{
 		requestFields.put(Rule.COURSE_SEATS, seats);
 		requestFields.put(Rule.COURSE_DESCRIPTION, description);
 		
-		Validator validator = new Validator(rules, requestFields);
+		Validator validator = new Validator(RuleFactory.rules(), requestFields);
 		if(validator.isValid()) {
-			SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 			Course course = new Course(name, Integer.parseInt(number), description);
-			Seminar seminar = new Seminar(course, location, format.parse(start), Integer.parseInt(seats));
+			Seminar seminar = new Seminar(course, location, ValidDateFormatRule.SDF.parse(start), Integer.parseInt(seats));
 			if(seminars.add(seminar)) {
 				response.sendRedirect("/course");
 			}
 		} else {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html");
-			response.getWriter().write(new CreateCourseLayout().buildValidatedForm(validator).render());	
+			response.getWriter().write(createCourseLayout.buildValidatedForm(validator).render());	
 		}
 	}
 }

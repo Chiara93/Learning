@@ -10,7 +10,7 @@ import com.app.validation.Validator;
 import j2html.tags.ContainerTag;
 import j2html.tags.DomContent;
 
-public class CreateCourseLayout {
+public class CreateCourseLayout{
 
 	public ContainerTag build(DomContent element) {
 		return html().with(
