@@ -10,12 +10,25 @@ import org.junit.Test;
 public class SeminarTest {
 	
 	private Seminar _seminar;
-	private Course _course;
 	
 	@Before
 	public void setup() {
-		_course = new Course("italian", 1, "grammar rules");
-		_seminar = new Seminar(_course, "Manno", new Date(117, 3, 21), 20);
+		_seminar = new Seminar("italian", 1, "grammar rules", "Manno", new Date(117, 3, 21), 20);
+	}
+	
+	@Test
+	public void nameTest() {
+		assertEquals("italian", _seminar.name());
+	}
+	
+	@Test
+	public void numberTest() {
+		assertEquals(1, _seminar.id());
+	}
+	
+	@Test
+	public void descriptionTest() {
+		assertEquals("grammar rules", _seminar.description());
 	}
 	
 	@Test

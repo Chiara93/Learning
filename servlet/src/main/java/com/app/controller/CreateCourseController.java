@@ -10,7 +10,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.app.model.Course;
 import com.app.model.Seminar;
 import com.app.validation.Rule;
 import com.app.validation.RuleFactory;
@@ -61,8 +60,7 @@ public class CreateCourseController implements Controller{
 		
 		Validator validator = new Validator(RuleFactory.rules(), requestFields);
 		if(validator.isValid()) {
-			Course course = new Course(name, Integer.parseInt(number), description);
-			Seminar seminar = new Seminar(course, location, ValidDateFormatRule.SDF.parse(start), Integer.parseInt(seats));
+			Seminar seminar = new Seminar(name, Integer.parseInt(number), description, location, ValidDateFormatRule.SDF.parse(start), Integer.parseInt(seats));
 			if(seminars.add(seminar)) {
 				response.sendRedirect("/course");
 			}

@@ -4,22 +4,35 @@ import java.util.Date;
 import java.util.List;
 
 public class Seminar {
-	private final Course _course;
+
+	private final String _name;
+	private final int _id;
+	private final String _description;
 	private final String _location;
 	private final Date _date;
 	private final int _seatsLeft;
 	private final List<Student> _students = new ArrayList<Student>();
 	
-	public Seminar(final Course course, final String location, final Date date, final int seatsLeft) {
-		_course = course;
+	public Seminar(final String name, final int id, final String description, final String location, final Date date, final int seatsLeft) {
+		_name = name;
+		_id = id;
+		_description = description;
 		_location = location;
 		_date = date;
 		_seatsLeft = seatsLeft;
 	}
 	
-	public Course course() {
-		return _course;
+	public String name() {
+		return _name;
 	}
+
+	public int id() {
+		return _id;
+	}
+
+	public String description() {
+		return _description;
+	}	
 	
 	public String location() {
 		return _location;
