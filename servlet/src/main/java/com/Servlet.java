@@ -18,22 +18,12 @@ import com.app.view.NotFound404Layout;
 
 public class Servlet extends HttpServlet {
 
-	
-//	private SQLiteConnectionPoolDataSource _ds;
-//	_ds = new SQLiteConnectionPoolDataSource();
-//	_ds.setUrl("jdbc:sqlite:/path");
-	
-//	private HikariDataSource _ds;
-//  _ds = new HikariDataSource();
-//	_ds.setJdbcUrl("jdbc:sqlite:/path");
-
 	private DataSource _ds;
-	
 	
 	@Override
 	public void init() throws ServletException {
 		try {
-			_ds = (DataSource)new InitialContext().lookup("java:/comp/env/jdbc/ds");
+			_ds = (DataSource)new InitialContext().lookup("java:/comp/env/jdbc/seminar");
 		} catch (NamingException e) {
 			throw new RuntimeException(e);
 		}
