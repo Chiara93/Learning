@@ -23,7 +23,7 @@ public class Servlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		try {
-			_ds = (DataSource)new InitialContext().lookup("java:/comp/env/jdbc/seminar");
+			_ds = (DataSource)new InitialContext().lookup("java:/comp/env/jdbc/ds");
 		} catch (NamingException e) {
 			throw new RuntimeException(e);
 		}
