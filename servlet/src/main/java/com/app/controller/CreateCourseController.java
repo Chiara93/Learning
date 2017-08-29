@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.app.database.SQLiteJDBC;
 import com.app.model.Course;
 import com.app.validation.Rule;
 import com.app.validation.RuleFactory;
@@ -31,17 +33,18 @@ public class CreateCourseController implements Controller{
 	public void execute(Context context) throws Exception {
 		HttpServletRequest request = context.request();
 		HttpServletResponse response = context.response();
+		Connection connection = context.connection();
 		
 		if("GET".equals(request.getMethod())) {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html");
 			response.getWriter().write(_createCourseLayout.buildForm().render());
 		} else if("POST".equals(request.getMethod())) {
-			validateForm(response, request);			
+			validateForm(response, request, connection);			
 		}
 	}
 	
-	private void validateForm(HttpServletResponse response, HttpServletRequest request) throws IOException, NumberFormatException, ParseException {
+	private void validateForm(HttpServletResponse response, HttpServletRequest request, Connection connection) throws IOException, NumberFormatException, ParseException {
 		Map<String, String> requestFields = new HashMap<>();
 		
 		String name = request.getParameter(Rule.COURSE_NAME);
@@ -61,6 +64,7 @@ public class CreateCourseController implements Controller{
 		Validator validator = new Validator(RuleFactory.rules(), requestFields);
 		if(validator.isValid()) {
 			Course course = new Course(name, Integer.parseInt(number), description, location, ValidDateFormatRule.SDF.parse(start), Integer.parseInt(seats));
+			//SQLiteJDBC.getInstance().insert(connection, course);
 			if(seminars.add(course)) {
 				response.sendRedirect("/course");
 			}
