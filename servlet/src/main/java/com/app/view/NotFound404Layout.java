@@ -4,9 +4,8 @@ import static j2html.TagCreator.*;
 
 import j2html.tags.ContainerTag;
 
-public class NotFound404Layout implements Layout{
+public class NotFound404Layout {
 
-	@Override
 	public ContainerTag build() {
 		return html().with(
 				head().with(
@@ -26,7 +25,7 @@ public class NotFound404Layout implements Layout{
 								)
 							)
 						)
-			);
+			    );
 	}
 
 }

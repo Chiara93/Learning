@@ -2,6 +2,7 @@ package com;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -34,17 +35,29 @@ public class Servlet extends HttpServlet {
 		
 		for(Controller c : ControllerFactory.controllers()){
 			if(c.handles(req.getRequestURI())){
+				Connection connection = null;
 				try {
-					Connection connection = _ds.getConnection();
-					connection.setAutoCommit(false);
-					c.execute(new Context(req, resp, connection));
-					connection.commit();
-					connection.close();
-					return;
-				} catch (Exception e) {
-					resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					throw new RuntimeException(e);
-				} 
+					connection = _ds.getConnection();
+					try {
+						connection.setAutoCommit(false);
+						c.execute(new Context(req, resp, connection));
+						connection.commit();		
+						return;
+					} catch (Exception e) {
+						resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+						connection.rollback();
+						throw new RuntimeException(e);
+					} 
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				finally {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 		resp.setContentType("text/html;charset=UTF-8");
