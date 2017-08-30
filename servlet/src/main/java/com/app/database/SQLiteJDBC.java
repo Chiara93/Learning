@@ -1,10 +1,17 @@
 package com.app.database;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import com.app.model.Course;
+import com.app.validation.Rule;
+import com.app.validation.ValidDateFormatRule;
 
 public class SQLiteJDBC {
 	
@@ -17,21 +24,39 @@ public class SQLiteJDBC {
 		return _instance;
 	}
 	
-	public void insert(Connection connection, Course course) {
+	public void insert(Connection connection, Map<String, String> courseFields) {
 		String query = "INSERT INTO Course VALUES(" + null + ", '"
-													+ course.name() + "', '"
-													+ course.description() + "', '"
-													+ course.location() + "', "
-													+ course.seatsLeft() + ", "
-													+ course.date()
-													+ " )";
+													+ courseFields.get(Rule.COURSE_NAME) + "', '"
+													+ courseFields.get(Rule.COURSE_DESCRIPTION) + "', '"
+													+ courseFields.get(Rule.COURSE_LOCATION) + "', "
+													+ courseFields.get(Rule.COURSE_SEATS) + ", '"
+													+ courseFields.get(Rule.COURSE_START)
+													+ "' )";
 		try {
 			Statement stm = connection.createStatement();
-			int result = stm.executeUpdate(query);
-			System.out.println("Inserito: " + result);
+			stm.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+	}
+	
+	public List<Course> findAll(Connection connection) {	
+		List<Course> courses = new ArrayList<>();		
+		String query = "select * from Course order by id";
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			 while ( rs.next() ) {
+	                courses.add(new Course(rs.getString("name"), 
+	                					   Integer.parseInt(rs.getString("id")), 
+	                					   rs.getString("description"), 
+	                					   rs.getString("location"), 
+	                					   ValidDateFormatRule.SDF.parse(rs.getString("start")), 
+	                					   Integer.parseInt(rs.getString("totalSeats"))));
+	         }
+		} catch (SQLException | NumberFormatException | ParseException e) {
+			throw new RuntimeException(e);
+		}
+		return courses;
 	}
 }

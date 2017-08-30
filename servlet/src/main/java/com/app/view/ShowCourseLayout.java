@@ -2,14 +2,16 @@ package com.app.view;
 
 import static j2html.TagCreator.*;
 
-import com.app.controller.CreateCourseController;
+import java.util.List;
+
+import com.app.model.Course;
 import com.app.validation.ValidDateFormatRule;
 
 import j2html.tags.DomContent;
 
 public class ShowCourseLayout extends Layout{
 	
-	public DomContent buildTableData() {
+	public DomContent buildTableData(List<Course> courses) {
 		DomContent tableElement = 
 				div().withClass("col-lg-8 col-md-8 col-sm-9").with(
   						table().withClass("table table-striped").with(
@@ -23,7 +25,7 @@ public class ShowCourseLayout extends Layout{
   								)
   							),
   							tbody().with(
-  								each(CreateCourseController.seminars, course -> tr(
+  								each(courses, course -> tr(
   									td(String.valueOf(course.id())),
   									td(course.name()),
   									td(course.location()),

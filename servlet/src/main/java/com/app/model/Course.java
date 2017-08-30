@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.app.validation.ValidDateFormatRule;
+
 public class Course {
 
 	private final String _name;
@@ -11,7 +13,7 @@ public class Course {
 	private final String _location;
 	private final Date _date;
 	private final int _seatsLeft;
-	private final List<Student> _students = new ArrayList<Student>();
+	private final List<Student> _students = new ArrayList<>();
 	
 	public Course(final String name, final int id, final String description, final String location, final Date date, final int seatsLeft) {
 		_name = name;
@@ -52,5 +54,10 @@ public class Course {
 	
 	public void enroll(Student student) {
 		_students.add(student);
+	}
+	
+	@Override
+	public String toString() {
+		return "Id: " + _id + ", Name: " + _name + ", Description: " +_description + ", Location: " + _location + ", Seats: " + _seatsLeft + ", Date: " + ValidDateFormatRule.SDF.format(_date);
 	}
 }

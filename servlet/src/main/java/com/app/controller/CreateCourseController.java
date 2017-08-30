@@ -3,26 +3,21 @@ package com.app.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.app.database.SQLiteJDBC;
-import com.app.model.Course;
 import com.app.validation.Rule;
 import com.app.validation.RuleFactory;
-import com.app.validation.ValidDateFormatRule;
 import com.app.validation.Validator;
 import com.app.view.CreateCourseLayout;
 
 public class CreateCourseController implements Controller{
 	
-	public static List<Course> seminars = new ArrayList<>();
-	private CreateCourseLayout _createCourseLayout = new CreateCourseLayout();
+	private final CreateCourseLayout _createCourseLayout = new CreateCourseLayout();
 	
 	@Override
 	public boolean handles(String route) {
@@ -63,11 +58,8 @@ public class CreateCourseController implements Controller{
 		
 		Validator validator = new Validator(RuleFactory.rules(), requestFields);
 		if(validator.isValid()) {
-			Course course = new Course(name, Integer.parseInt(number), description, location, ValidDateFormatRule.SDF.parse(start), Integer.parseInt(seats));
-			//SQLiteJDBC.getInstance().insert(connection, course);
-			if(seminars.add(course)) {
-				response.sendRedirect("/course");
-			}
+			SQLiteJDBC.getInstance().insert(connection, requestFields);
+			response.sendRedirect("/course");
 		} else {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html");
