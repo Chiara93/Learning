@@ -40,6 +40,27 @@ public class SQLiteJDBC {
 		} 
 	}
 	
+	public Course findById(Connection connection, int id) {
+		String query = "select * from Course where id = " + id;
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			if ( rs.next() ) {
+               return new Course(rs.getString("name"), 
+                					   Integer.parseInt(rs.getString("id")), 
+                					   rs.getString("description"), 
+                					   rs.getString("location"), 
+                					   ValidDateFormatRule.SDF.parse(rs.getString("start")), 
+                					   Integer.parseInt(rs.getString("totalSeats")));
+			}
+			
+		} catch (SQLException | NumberFormatException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public List<Course> findAll(Connection connection) {	
 		List<Course> courses = new ArrayList<>();		
 		String query = "select * from Course order by id";

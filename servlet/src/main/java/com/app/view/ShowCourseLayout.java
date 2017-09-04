@@ -27,7 +27,7 @@ public class ShowCourseLayout extends Layout{
   							tbody().with(
   								each(courses, course -> tr(
   									td(String.valueOf(course.id())),
-  									td(course.name()),
+  									td().with(a(course.name()).withHref("/course/" + course.id())),
   									td(course.location()),
   									td(String.valueOf(course.seatsLeft())),
   									td(ValidDateFormatRule.SDF.format(course.date()))
