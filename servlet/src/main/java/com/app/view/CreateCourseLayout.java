@@ -23,12 +23,6 @@ public class CreateCourseLayout extends Layout{
 								)
 							),
 							div().withClass("form-group").with(
-								label("Number").withClass("col-sm-2 control-label").attr("for", "number"),
-								div().withClass("col-sm-10").with(
-									input().withClass("form-control").withType("text").withId("number").withName("number")
-								)
-							),
-							div().withClass("form-group").with(
 								label("Start").withClass("col-sm-2 control-label").attr("for", "start"),
 								div().withClass("col-sm-10").with(
 									input().withClass("form-control").withType("date").withId("start").withName("start")
@@ -67,7 +61,6 @@ public class CreateCourseLayout extends Layout{
 				 div().withClass("col-lg-8 col-md-8 col-sm-9").with(
 					 form().withClass("form-horizontal").withRole("form").withMethod("post").withAction("/course/create").with(
 						createValidatedInput("Name", Rule.COURSE_NAME, Rule.COURSE_NAME, validator.get(Rule.COURSE_NAME), validator.validate().get(Rule.COURSE_NAME)),
-						createValidatedInput("Number", Rule.COURSE_NUMBER, Rule.COURSE_NUMBER, validator.get(Rule.COURSE_NUMBER), validator.validate().get(Rule.COURSE_NUMBER)),
 						createValidatedInput("Start", Rule.COURSE_START, Rule.COURSE_START, validator.get(Rule.COURSE_START), validator.validate().get(Rule.COURSE_START)),
 						createValidatedInput("Location", Rule.COURSE_LOCATION, Rule.COURSE_LOCATION, validator.get(Rule.COURSE_LOCATION), validator.validate().get(Rule.COURSE_LOCATION)),
 						createValidatedInput("Seats", Rule.COURSE_SEATS, Rule.COURSE_SEATS, validator.get(Rule.COURSE_SEATS), validator.validate().get(Rule.COURSE_SEATS)),

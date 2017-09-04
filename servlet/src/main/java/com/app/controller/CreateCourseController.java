@@ -43,14 +43,12 @@ public class CreateCourseController implements Controller{
 		Map<String, String> requestFields = new HashMap<>();
 		
 		String name = request.getParameter(Rule.COURSE_NAME);
-		String number = request.getParameter(Rule.COURSE_NUMBER);
 		String start = request.getParameter(Rule.COURSE_START);
 		String location = request.getParameter(Rule.COURSE_LOCATION);
 		String seats = request.getParameter(Rule.COURSE_SEATS);
 		String description = request.getParameter(Rule.COURSE_DESCRIPTION);
 		
 		requestFields.put(Rule.COURSE_NAME, name);
-		requestFields.put(Rule.COURSE_NUMBER, number);
 		requestFields.put(Rule.COURSE_START, start);
 		requestFields.put(Rule.COURSE_LOCATION, location);
 		requestFields.put(Rule.COURSE_SEATS, seats);
