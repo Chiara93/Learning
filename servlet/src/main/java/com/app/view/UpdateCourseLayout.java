@@ -16,7 +16,7 @@ public class UpdateCourseLayout extends Layout {
 	public DomContent buildFormForUpdate(Course course) {
 		DomContent formElement =
 				 div().withClass("col-lg-8 col-md-8 col-sm-9").with(
-					 form().withClass("form-horizontal").withRole("form").withMethod("post").withAction("/course/update").with(
+					 form().withClass("form-horizontal").withRole("form").withMethod("post").withAction("/course/update/"+ course.id()).with(
 							div().withClass("form-group").with(
 								label("Name").withClass("col-sm-2 control-label").attr("for", "name"),
 								div().withClass("col-sm-10").with(

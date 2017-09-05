@@ -17,7 +17,7 @@ import com.app.view.CreateCourseLayout;
 
 public class CreateCourseController implements Controller{
 	
-	private final CreateCourseLayout _createCourseLayout = new CreateCourseLayout();
+	public static final CreateCourseLayout _createCourseLayout = new CreateCourseLayout();
 	
 	@Override
 	public boolean handles(String route) {
