@@ -33,11 +33,30 @@ public class SQLiteJDBC {
 													+ courseFields.get(Rule.COURSE_START)
 													+ "' )";
 		try {
-			Statement stm = connection.createStatement();
-			stm.executeUpdate(query);
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
+	}
+	
+	public void update(Connection connection, String id, Map<String, String> courseFields) {
+		System.out.println("Sto per fare update");
+		String query = "Update Course SET " +
+											"name = '" + courseFields.get(Rule.COURSE_NAME) +"', " +
+											"description = '" + courseFields.get(Rule.COURSE_DESCRIPTION) + "', " +
+											"location = '" + courseFields.get(Rule.COURSE_LOCATION) + "', " +
+											"totalSeats = " + Integer.parseInt(courseFields.get(Rule.COURSE_SEATS)) + ", " +
+											"start = '" + courseFields.get(Rule.COURSE_START) + "' " +
+											"where id = " + Integer.parseInt(id);
+		
+		try {
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public Course findById(Connection connection, int id) {
@@ -55,7 +74,6 @@ public class SQLiteJDBC {
 			}
 			
 		} catch (SQLException | NumberFormatException | ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

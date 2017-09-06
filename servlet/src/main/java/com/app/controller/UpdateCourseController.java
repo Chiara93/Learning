@@ -1,8 +1,5 @@
 package com.app.controller;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,16 +51,15 @@ public class UpdateCourseController implements Controller {
 			requestFields.put(Rule.COURSE_DESCRIPTION, description);
 
 			Validator validator = new Validator(RuleFactory.rules(), requestFields);
-			if(validator.isValid()) {
-				//SQLiteJDBC.getInstance().update(context.connection(), path[3], requestFields);
+			if(validator.isValid()) {	
+				System.out.println("Sono nel posto giusto");
+				SQLiteJDBC.getInstance().update(context.connection(), path[3], requestFields);
 				response.sendRedirect("/course");
 			} else {
 				response.setCharacterEncoding("UTF-8");
 				response.setContentType("text/html");
-				response.getWriter().write(CreateCourseController._createCourseLayout.buildValidatedForm(validator).render());	
+				response.getWriter().write(CreateCourseController._createCourseLayout.buildValidatedForm(context.request().getRequestURI(), validator).render());	
 			}
-
-			//System.out.println("CORSO TO UPDATE: " + path[3]);
 		}
 	}
 

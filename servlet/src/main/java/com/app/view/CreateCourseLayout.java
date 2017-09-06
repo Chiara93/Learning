@@ -56,10 +56,10 @@ public class CreateCourseLayout extends Layout{
 		return build(formElement);
 	}
 
-	public DomContent buildValidatedForm(Validator validator) {
+	public DomContent buildValidatedForm(String requestURI, Validator validator) {
 		DomContent formElement =
 				 div().withClass("col-lg-8 col-md-8 col-sm-9").with(
-					 form().withClass("form-horizontal").withRole("form").withMethod("post").withAction("/course/create").with(
+					 form().withClass("form-horizontal").withRole("form").withMethod("post").withAction(requestURI).with(
 						createValidatedInput("Name", Rule.COURSE_NAME, Rule.COURSE_NAME, validator.get(Rule.COURSE_NAME), validator.validate().get(Rule.COURSE_NAME)),
 						createValidatedInput("Start", Rule.COURSE_START, Rule.COURSE_START, validator.get(Rule.COURSE_START), validator.validate().get(Rule.COURSE_START)),
 						createValidatedInput("Location", Rule.COURSE_LOCATION, Rule.COURSE_LOCATION, validator.get(Rule.COURSE_LOCATION), validator.validate().get(Rule.COURSE_LOCATION)),

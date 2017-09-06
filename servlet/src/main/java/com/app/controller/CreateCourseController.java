@@ -61,7 +61,7 @@ public class CreateCourseController implements Controller{
 		} else {
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html");
-			response.getWriter().write(_createCourseLayout.buildValidatedForm(validator).render());	
+			response.getWriter().write(_createCourseLayout.buildValidatedForm(request.getRequestURI(), validator).render());	
 		}
 	}
 }
