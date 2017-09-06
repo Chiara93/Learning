@@ -21,7 +21,8 @@ public class ShowCourseLayout extends Layout{
   									th("name"),
   									th("location"),
   									th("totalSeats"),
-  									th("start")
+  									th("start"),
+  									th("action")
   								)
   							),
   							tbody().with(
@@ -30,7 +31,8 @@ public class ShowCourseLayout extends Layout{
   									td().with(a(course.name()).withHref("/course/" + course.id())),
   									td(course.location()),
   									td(String.valueOf(course.seatsLeft())),
-  									td(ValidDateFormatRule.SDF.format(course.date()))
+  									td(ValidDateFormatRule.SDF.format(course.date())),
+  									td().with(a("delete").withHref("/course/delete/" + course.id()))
   									)
   								)
   							)

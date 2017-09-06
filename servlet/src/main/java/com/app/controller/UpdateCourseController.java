@@ -52,7 +52,6 @@ public class UpdateCourseController implements Controller {
 
 			Validator validator = new Validator(RuleFactory.rules(), requestFields);
 			if(validator.isValid()) {	
-				System.out.println("Sono nel posto giusto");
 				SQLiteJDBC.getInstance().update(context.connection(), path[3], requestFields);
 				response.sendRedirect("/course");
 			} else {

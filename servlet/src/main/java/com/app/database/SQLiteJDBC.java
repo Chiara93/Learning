@@ -41,7 +41,6 @@ public class SQLiteJDBC {
 	}
 	
 	public void update(Connection connection, String id, Map<String, String> courseFields) {
-		System.out.println("Sto per fare update");
 		String query = "Update Course SET " +
 											"name = '" + courseFields.get(Rule.COURSE_NAME) +"', " +
 											"description = '" + courseFields.get(Rule.COURSE_DESCRIPTION) + "', " +
@@ -57,6 +56,17 @@ public class SQLiteJDBC {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void delete(Connection connection, String id) {
+		String query = "Delete from Course where id = " + Integer.parseInt(id);
+		
+		try {
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	public Course findById(Connection connection, int id) {
